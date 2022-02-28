@@ -1,5 +1,4 @@
-# 3072l.github.io
-My blog
+# My blog
 
 
 # list
