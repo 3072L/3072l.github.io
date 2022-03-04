@@ -1,8 +1,7 @@
-从零开始写Fuzzer(1):实现一个dumb Fuzzer
 
 ### 1 分析win32calc.exe
 
-![](../rustdumbpng/1.jpg)
+![](./rustdumbpng/1.jpg)
 
 这次的分析对象是win32calc，作为一个dumb fuzzer，我们要实现的仅仅是枚举计算器的各种操作，并期待它crash，不需要code coverage也不需要优化mutator。crash我们可以通过设置windbg为默认调试器来捕获
 
@@ -10,27 +9,27 @@
 
 这里带大家来熟悉一下win32calc的功能
 
-![](../rustdumbpng/1.5.jpg)
+![](./rustdumbpng/1.5.jpg)
 
 常见的计算功能
 
-![](../rustdumbpng/2.jpg)
+![](./rustdumbpng/2.jpg)
 
 **Alt+V**快捷键可以打开**查看**这个菜单，在此状态下**Alt**加上数字1,2,3,4可以切换到不同的模式，同时**Ctrl**加上F4,U,E会为计算器添加额外的功能
 
-![](../rustdumbpng/3.jpg)
+![](./rustdumbpng/3.jpg)
 
 **Alt+3**进入程序员模式
 
-![](../rustdumbpng/4.jpg)
+![](./rustdumbpng/4.jpg)
 
 **Ctrl+E**计算日期差
 
-![](../rustdumbpng/5.jpg)
+![](./rustdumbpng/5.jpg)
 
 **Ctrl+U**单位换算
 
-![](../rustdumbpng/6.jpg)
+![](./rustdumbpng/6.jpg)
 
 **Ctrl+H**  *历史记录*
 
@@ -163,7 +162,7 @@ let mut black_list = HashSet::new();
 
 至此我们就实现了一个dumb fuzzer，来看看效果
 
-![](../rustdumbpng/7.gif)
+![](./rustdumbpng/7.gif)
 
 ### 3 结果
 很遗憾，经过了一晚上的fuzz，这个dumb fuzzer一个crash都没产生，真是有点dumb了:-(
