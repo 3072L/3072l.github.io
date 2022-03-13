@@ -62,7 +62,7 @@ pub fn attach_pid(pid: u32) -> Result<Self, io::Error>{
 
 为了获得高效的输入，再次分析win32calc，通过spy++可以发现win32calc中的每一个Button实际上都是有句柄的
 
-![](../rustsmartjpg/2.jpg)
+![](rustsmartjpg/2.jpg)
 
 实际上我们可以通过枚举计算器窗口的所有句柄，然后随机的选取各个button，之后对获取的button发送鼠标左键消息，这样我们产生的所有输入都将是有效的
 
@@ -70,7 +70,7 @@ pub fn attach_pid(pid: u32) -> Result<Self, io::Error>{
 
 除了对计算器的每个button发送鼠标左键消息外，我们还需要能够切换计算器的不同模式
 
-![](../rustsmartjpg/3.jpg)
+![](rustsmartjpg/3.jpg)
 
 这里实际上可以通过menu相关的api来枚举menu id，同时我们还要枚举子menu的menu最后给对应的menu id发送comman消息就能实现随机的模式切换，通过递归很容易能实现枚举所有的menu id
 
@@ -279,7 +279,7 @@ pub fn close(&self) -> Result<(), io::Error> {
 ### 2 获取win32calc的代码覆盖率以及crash信息
 windows下收集代码覆盖率的工具有如下这些
 
-![](../rustsmartjpg/4.jpg)
+![](rustsmartjpg/4.jpg)
 
 这里我们使用的mesos来辅助我们来获得代码覆盖率
 mesos实际上是一个Rust写的dbg，通过IDA或bninja的脚本我们可以导出目标的basic block的信息，在运行时通过bb信息以及INT 3断点来获得实时的覆盖率，当目标进程crash时会自动dump，优点是上手简单，缺点是不能获得边的覆盖率
@@ -600,27 +600,27 @@ pub fn mutator(stats: Arc<Mutex<Statistics>>) -> Result<Vec<FuzzerAction>, Box<d
 
 这里的所有随机数和对应的概率都需要我们利用代码覆盖率来进行优化，我们可以输出一些值来方便图形化，从而直观的观察如何修改各种策略的概率会相应的提高代码覆盖率
 
-![](../rustsmartjpg/4.5.jpg)
+![](rustsmartjpg/4.5.jpg)
 
-![](../rustsmartjpg/5.jpg)
+![](rustsmartjpg/5.jpg)
 
 ### 5 其他
 
 最后让我们来看看在20s内都有Fuzz到了哪些Crash
 
-![](../rustsmartjpg/6.jpg)
+![](rustsmartjpg/6.jpg)
 
-![](../rustsmartjpg/7.jpg)
+![](rustsmartjpg/7.jpg)
 
-![](../rustsmartjpg/8.jpg)
+![](rustsmartjpg/8.jpg)
 
-![](../rustsmartjpg/9.jpg)
+![](rustsmartjpg/9.jpg)
 
-![](../rustsmartjpg/10.jpg)
+![](rustsmartjpg/10.jpg)
 
-![](../rustsmartjpg/11.jpg)
+![](rustsmartjpg/11.jpg)
 
-![](../rustsmartjpg/12.jpg)
+![](rustsmartjpg/12.jpg)
 
 另外不知道大家有没有看今年的bluehat，其中的Hyper-V Fuzzer在实现上和我们这里的思路其实大同小异，有兴趣的话可以学习一下下面的slides,然后通过她的攻击面分析用mesos写一个Hyper-V的Fuzzer出来
 
